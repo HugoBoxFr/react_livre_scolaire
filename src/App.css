@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 100px;
   width: 80%;
   margin: 0 auto;
 }
@@ -42,6 +42,31 @@
 
 h1 {
   margin: 0 0 50px 0;
-  color: white;
+  color: lightblue;
   text-align: left;
+}
+
+.NavBar {
+  width: 100%;
+  height: 50px;
+  background-color: darkblue;
+  -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+  position: fixed;
+  z-index: 10;
+}
+
+.NavBar ul {
+  margin: 0;
+}
+
+.NavBar ul li {
+  float: left;
+  list-style: none;
+  padding: 14px;
+}
+
+.NavBar ul li a {
+  color: lightblue;
+  text-decoration: none;
 }

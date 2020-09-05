@@ -8,7 +8,8 @@ h2 {
     margin: 0;
     width: 100%;
     text-align: left;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightblue;
+    color: lightblue;
 }
 
 .Book {

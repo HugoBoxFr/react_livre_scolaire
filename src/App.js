@@ -1,7 +1,7 @@
 import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-import Books from './components/Books';
+import Book from './components/Book';
 
 
 const client = new ApolloClient({
@@ -14,7 +14,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Bienvenue sur "Le Livre Scolaire"</h1>
         <ApolloProvider client={client}>
-          <Books id={1339497}/>
+          <Book id={1339497}/>
         </ApolloProvider>
       </div>
     );

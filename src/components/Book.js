@@ -1,11 +1,13 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import SingleBook from './SingleBook';
 
+// (ids: 1339497)
 const GET_BOOKS = gql`
     query {
         viewer {
-            books(ids: 1339497) {
+            books {
                 hits{
                     id
                     displayTitle
@@ -22,7 +24,7 @@ const GET_BOOKS = gql`
     }
 `;
 
-class BookTest extends React.Component {        
+class Book extends React.Component {        
     render() {
         return (
             <Query query={GET_BOOKS} variables={{ id: `${this.props.id}` }}>
@@ -41,7 +43,7 @@ class BookTest extends React.Component {
                                 data.viewer.books.hits.map((b) => {
                                     return (
                                         <div key={b.id}>
-                                            <h2>{b.subjects[0].name}</h2>
+                                            <SingleBook book={b} />
                                         </div>
                                     );
                                 })
@@ -54,4 +56,4 @@ class BookTest extends React.Component {
     }
 }
 
-export default BookTest;
+export default Book;

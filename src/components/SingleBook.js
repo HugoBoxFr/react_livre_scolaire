@@ -1,12 +1,16 @@
 import React from 'react';
-
+import './SingleBook.css';
 
 function SingleBook(props) {
 
     return (
-        <div>
-            <p>{props.book.displayTitle}</p>
-            <img src={props.book.url} alt={props.book.displayTitle} />
+        <div className="SingleBook">
+            <div className="title">
+                <h2>{props.book.displayTitle}</h2>
+            </div>
+            <div className="cover">
+                { props.book.url != null ? <img src={props.book.url} alt={props.book.displayTitle} /> : <p>Image indisponible</p>}
+            </div>
         </div>
     );
 

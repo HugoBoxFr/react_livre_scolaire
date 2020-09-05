@@ -4,7 +4,6 @@ import { Query } from 'react-apollo';
 import SingleBook from './SingleBook';
 import './Books.css';
 
-
 const GET_BOOKS = gql`
     query {
         viewer {
@@ -25,94 +24,52 @@ const GET_BOOKS = gql`
     }
 `;
 
-const GET_ONE_BOOK = gql`
-    query {
-        viewer {
-            books (ids: 1339497){
-                hits {
-                    id
-                    displayTitle
-                    url
-                    subjects {
-                        name
-                    }
-                    levels {
-                        name
-                    }
-                }
-            }
-        }
-    }
-`;
 
-class Books extends React.Component {   
+class Books extends React.Component {  
     constructor(props) {
         super(props);
-
-        this.myClick = this.myClick.bind(this);
+        this.state = {
+            slice: this.props.slice,
+        };
     }
 
     myClick() {
-        alert("Ce livre ne vous est pas accessible.");
+        alert("Ce livre n'est pas encore disponible, rendez vous dans votre espace.");
     }
 
     render() {
         return (
-            <main>
-                <Query query={GET_ONE_BOOK} variables={{ id: `${this.props.id}` }}>
-                    {({loading, error, data}) => {
-                        if (loading) {
-                            return <div>Loading</div>
-                        }
+            <Query query={GET_BOOKS}>
+                {({loading, error, data}) => {
+                    if (loading) {
+                        return <div>Loading</div>
+                    }
 
-                        if (error) {
-                            return <div>Error: { error.toString()}</div>
-                        }
+                    if (error) {
+                        return <div>Error: { error.toString()}</div>
+                    }
 
-                        return (
+                    if (this.props.slice === null) {
+                        this.setState({ slice : data.viewer.books.hits.length});
+                    }
+
+                    return (
+                        <div>
                             <div className="Books">
-                                <h2>Votre bibliothèque</h2>
                                 {
-                                    data.viewer.books.hits.map((b) => 
-                                        <div key={b.id} className="Book">
-                                            { b.displayTitle !== null ? <SingleBook book={b}/> : '' }
-                                        </div>
+                                    data.viewer.books.hits.slice(0, this.state.slice).map((b) => 
+                                        b.displayTitle !== null ? 
+                                            <div key={b.id} className="Book" onClick={this.myClick} >
+                                                { b.displayTitle !== null ? <SingleBook book={b} /> : '' }
+                                            </div>
+                                        : '' 
                                     )
                                 }
                             </div>
-                        )
-                    }}
-                </Query>
-
-                <Query query={GET_BOOKS}>
-                    {({loading, error, data}) => {
-                        if (loading) {
-                            return <div>Loading</div>
-                        }
-
-                        if (error) {
-                            return <div>Error: { error.toString()}</div>
-                        }
-
-                        return (
-                            <div>
-                                <h2>Bientôt disponible</h2>
-                                <div className="Books">
-                                    {
-                                        data.viewer.books.hits.slice(0, 15).map((b) => 
-                                            b.displayTitle !== null ? 
-                                                <div key={b.id} className="Book"  onClick={this.myClick}>
-                                                    { b.displayTitle !== null ? <SingleBook book={b} /> : '' }
-                                                </div>
-                                            : ''
-                                        )
-                                    }
-                                </div>
-                            </div>
-                        )
-                    }}
-                </Query>
-            </main>
+                        </div>
+                    )
+                }}
+            </Query>
         );
     }
 }

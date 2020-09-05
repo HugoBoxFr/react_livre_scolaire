@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://www.pngkey.com/png/full/666-6663236_blue-header-png-6-png-image-blue.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 code {

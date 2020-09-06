@@ -1,6 +1,6 @@
 .SingleBook {
     background-color: white;
-    height: 200px;
+    height: 225px;
     margin: 10px;
     padding: 0 10px 10px;
     text-align: center;
@@ -54,4 +54,24 @@
     margin: 0;
     font-style: italic;
     font-size: 10px;
+}
+
+.SingleBook button {
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 5px;
+    border: none;
+    float: right;
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.SingleBook button:hover {
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }

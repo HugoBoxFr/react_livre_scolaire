@@ -1,29 +1,8 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import SingleBook from './SingleBook';
 import './Books.css';
-
-const GET_BOOKS = gql`
-    query {
-        viewer {
-            books {
-                hits {
-                    id
-                    displayTitle
-                    url
-                    subjects {
-                        name
-                    }
-                    levels {
-                        name
-                    }
-                }
-            }
-        }
-    }
-`;
-
+import * as Constants from './../constants';
 
 class Books extends React.Component {  
     constructor(props) {
@@ -33,13 +12,17 @@ class Books extends React.Component {
         };
     }
 
-    myClick() {
-        alert("Ce livre n'est pas encore disponible, rendez vous dans votre espace.");
-    }
+    // myClick() {
+    //     alert("Ce livre n'est pas encore disponible, rendez vous dans votre espace.");
+    // }
+
+    // addBook(id) {
+    //     console.log(id);
+    // }
 
     render() {
         return (
-            <Query query={GET_BOOKS}>
+            <Query query={Constants.GET_BOOKS}>
                 {({loading, error, data}) => {
                     if (loading) {
                         return <div>Loading</div>
@@ -59,8 +42,9 @@ class Books extends React.Component {
                                 {
                                     data.viewer.books.hits.slice(0, this.state.slice).map((b) => 
                                         b.displayTitle !== null ? 
-                                            <div key={b.id} className="Book" onClick={this.myClick} >
-                                                { b.displayTitle !== null ? <SingleBook book={b} /> : '' }
+                                            // <div key={b.id} className="Book" onClick={this.myClick} >
+                                            <div key={b.id} className="Book">
+                                                { b.displayTitle !== null ? <SingleBook book={b} rent={true} /> : '' }
                                             </div>
                                         : '' 
                                     )
